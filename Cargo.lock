@@ -394,17 +394,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "build_rust"
-version = "0.1.0"
-dependencies = [
- "actix-web",
- "crochee_plugin",
- "log",
- "log4rs",
- "serde",
-]
-
-[[package]]
 name = "bumpalo"
 version = "3.4.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1529,6 +1518,17 @@ dependencies = [
  "proc-macro2",
  "quote",
  "unicode-xid",
+]
+
+[[package]]
+name = "system-build-rust"
+version = "0.1.0"
+dependencies = [
+ "actix-web",
+ "crochee_plugin",
+ "log",
+ "log4rs",
+ "serde",
 ]
 
 [[package]]
