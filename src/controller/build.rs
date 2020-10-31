@@ -1,14 +1,15 @@
 use crate::err::ResponseError;
-use actix_web::{post, web, Responder};
+use actix_web::{post, web, HttpResponse};
 use serde::Deserialize;
 
 #[post("/build/plugin/{name}")]
 pub async fn build_plugin(
     name: web::Path<String>,
     plugin_content: web::Json<PluginContent>,
-) -> impl Responder {
+) -> HttpResponse {
     println!("{},{:#?}", name, plugin_content);
-    web::Json(ResponseError::new(500, String::from("recovery")))
+    let err = ResponseError::new(500, String::from("recovery"));
+    HttpResponse::from_error(err)
 }
 
 #[derive(Debug, Deserialize)]
