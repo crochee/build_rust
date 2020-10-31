@@ -17,7 +17,7 @@ impl fmt::Display for ResponseError {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(
             f,
-            "Internal Server response Error!code:{},msg:{})",
+            "Internal Server response Error!code:{},msg:{}",
             self.code, self.msg
         )
     }
