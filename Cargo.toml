@@ -1,0 +1,14 @@
+[package]
+name = "build_rust"
+version = "0.1.0"
+authors = ["crochee <13522570308@139.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+log = "0.4.11"
+log4rs = "0.13.0"
+actix-web = "3.2.0"
+serde = "1.0.117"
+rust_plugin = "0.1.0"
