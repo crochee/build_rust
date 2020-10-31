@@ -1,15 +1,15 @@
 use std::{error::Error, fmt};
 use serde::Serialize;
 
-#[derive(Debug,Serialize)]
+#[derive(Debug, Serialize)]
 pub struct ResponseError {
     code: usize,
-    msg: String,
+    message: String,
 }
 
 impl ResponseError {
     pub fn new(code: usize, message: String) -> ResponseError {
-        ResponseError { code, msg: message }
+        ResponseError { code, message }
     }
 }
 
@@ -18,7 +18,7 @@ impl fmt::Display for ResponseError {
         write!(
             f,
             "Internal Server response Error!code:{},msg:{}",
-            self.code, self.msg
+            self.code, self.message
         )
     }
 }
