@@ -1,5 +1,6 @@
 mod logger;
 
+pub mod err;
 pub mod router;
 pub mod controller;
 

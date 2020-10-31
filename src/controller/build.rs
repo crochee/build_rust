@@ -1,13 +1,13 @@
 use actix_web::{post, web, Responder};
 use serde::Serialize;
-use std::collections::HashMap;
+use crate::err::ResponseError;
 
 #[post("/build/plugin/{name}")]
 pub async fn build_plugin(
-    web::Path((name)): web::Path<(String)>,
+    name: web::Path<String>,
     plugin_content: web::Json<PluginContent>,
 ) -> impl Responder {
-    web::Json()
+    web::Json(ResponseError::new(500, String::from("recovery")))
 }
 
 #[derive(Serialize)]
