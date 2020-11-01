@@ -1,12 +1,13 @@
+use log::info;
+
+use actix_web::{App, HttpServer, middleware};
+
 mod logger;
 
 pub mod err;
 pub mod router;
 pub mod controller;
-
-use log::info;
-
-use actix_web::{App, HttpServer, middleware};
+pub mod service;
 
 
 #[actix_web::main]
