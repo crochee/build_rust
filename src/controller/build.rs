@@ -15,13 +15,10 @@ pub async fn build_plugin(
     //                                     plugin_content.id,
     //                                     plugin_content.path.to_string(),
     //                                     plugin_content.content.to_string());
-    let plugin_boxed_raw = impl_plugin::load_plugin(name.0,
-                                                    plugin_content.id,
-                                                    plugin_content.path.to_string(),
-                                                    plugin_content.content.to_string());
-    let plugin_impl = unsafe {
-        Box::from_raw(plugin_boxed_raw)
-    };
+    let plugin_impl = impl_plugin::load_plugin(name.0,
+                                               plugin_content.id,
+                                               plugin_content.path.to_string(),
+                                               plugin_content.content.to_string());
     plugin_impl.setup();
     plugin_impl.run();
     plugin_impl.teardown();
@@ -35,13 +32,12 @@ pub struct PluginContent {
     pub content: String,
 }
 
-fn call_dynamic(name: String, id: usize, path: String, content: String) -> lib::Result<*mut dyn Plugin> {
+fn call_dynamic(name: String, plu: PluginContent) -> lib::Result<impl Plugin> {
     let lib = lib::Library::new("./service/plugin_impl/target/debug/plugin_impl.dll")?;
     unsafe {
-        let load_plugin: lib::Symbol<unsafe extern fn(String, usize, String, String) -> *mut dyn Plugin> = lib.get(b"load_plugin")?;
-        let plugin_boxed_raw = load_plugin(name, id, path, content);
-        let plugin_impl = Box::from_raw(plugin_boxed_raw);
-
+        let plugin_func: lib::Symbol<unsafe fn(String, usize, String, String) -> impl Plugin>
+            = lib.get(b"load_plugin")?;
+        let plugin_impl = plugin_func(name, plu.id, plu.path, plu.content);
         Ok(plugin_impl)
     }
 }

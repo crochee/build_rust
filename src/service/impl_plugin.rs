@@ -7,14 +7,13 @@ pub struct ExamplePlugin {
     pub content: String,
 }
 
-pub fn load_plugin(name: String, id: usize, path: String, content: String) -> *mut dyn Plugin {
-    let ep = ExamplePlugin {
+pub fn load_plugin(name: String, id: usize, path: String, content: String) -> impl Plugin {
+    ExamplePlugin {
         name,
         id,
         path,
         content,
-    };
-    Box::into_raw(Box::new(ep))
+    }
 }
 
 impl Plugin for ExamplePlugin {
